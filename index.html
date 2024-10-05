@@ -1,1 +1,831 @@
-<h1>hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.72.0" />
+    <title>Chronicles of Exoplanet Exploration</title>
+
+    <link
+      rel="canonical"
+      href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      /* GLOBAL STYLES
+    --------------------------------------------- */
+    .quiz-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+        padding: 20px;
+    }
+    .quiz-box:hover {
+        transform: scale(1.05);
+        background-color: #45a049;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .quiz-box h3 {
+        margin: 0;
+        font-size: 1.5em;
+        animation: fadeIn 1s ease-in-out;
+    }
+    .quiz-box p {
+        margin: 10px 0 0;
+        font-size: 1em;
+        animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+      /* Padding below the footer and lighter body text */
+
+      body {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        color: #5a5a5a;
+      }
+
+      /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------- */
+
+      /* Carousel base class */
+      .carousel {
+        margin-bottom: 4rem;
+      }
+
+      /* Since positioning the image, we need to help out the caption */
+      .carousel-caption {
+       display: block !important;
+       position: absolute;
+       top: 20%;
+       left: 20%;
+       right: 20%;
+       bottom: 20%;
+       padding: 10px;
+       font-size: 18px;
+       color: #fff;
+       text-align: center;
+      }
+
+      @media (max-width: 768px) {
+  .carousel-caption {
+        font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+  .carousel-caption {
+       font-size: 12px;
+        }
+      }
+
+ /* Declare heights because of positioning of img element */
+ .carousel-item {
+        height: 32rem;
+      }
+
+      .carousel-item > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        height: 32rem;
+      }
+
+
+
+      /* MARKETING CONTENT
+-------------------------------------------------- */
+
+      /* Center align the text within the three columns below the carousel */
+      .marketing .col-lg-4 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .marketing h2 {
+        font-weight: 400;
+      }
+
+      .marketing .col-lg-4 p {
+        margin-right: 0.75rem;
+        margin-left: 0.75rem;
+      }
+
+      /* Featurettes
+------------------------- */
+
+      .featurette-divider {
+        margin: 5rem 0;
+        /* Space out the Bootstrap <hr> more */
+      }
+
+      /* Thin out the marketing headings */
+      .featurette-heading {
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -0.05rem;
+      }
+
+      /* RESPONSIVE CSS
+-------------------------------------------------- */
+
+      @media (min-width: 40em) {
+        /* Bump up size of carousel content */
+        .carousel-caption p {
+          margin-bottom: 1.25rem;
+          font-size: 1.25rem;
+          line-height: 1.4;
+        }
+
+        .featurette-heading {
+          font-size: 50px;
+        }
+      }
+
+      @media (min-width: 62em) {
+        .featurette-heading {
+          margin-top: 7rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Centaurus-A</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+              <li class="nav-item active">
+                <a class="nav-link" aria-current="page" href="#project-direct">Project</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about-direct">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contacts-direct">Contacts</a>
+              </li>
+              
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active" style="background-image: url('/picture/pexels-felixmittermeier-956981.jpg'); background-size: cover; background-position: center;">
+            <div class="carousel-caption d-none d-md-block">
+              <h1>Chronicles of Exoplanet Exploration</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis delectus unde hic quos placeat nobis invent62ore consequuntur esse, at illum eligendi fugit magnam quis, facere iste aliquid. Rem, maiores eius?
+              </p>
+              <p>
+                <a class="btn btn-lg btn-primary" href="#" role="button"
+                  >Learn more</a
+                >
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('/picture/041018_LG_TESS_feat.webp'); background-size: cover; background-position: center;">
+            <div class="carousel-caption d-none d-md-block">
+              <h1>Unlocking Secrets of the Universe</h1>
+              <p>
+             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore asperiores quidem, iste nisi aut alias aspernatur dolorum facilis libero minima nam, laborum, odit corporis necessitatibus animi ducimus ex blanditiis. Ea?
+              </p>
+              <p>
+                <a class="btn btn-lg btn-primary" href="#" role="button"
+                  >Learn more</a
+                >
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('/picture/pexels-felixmittermeier-956981.jpg'); background-size: cover; background-position: center;">
+            <div class="carousel-caption d-none d-md-block">
+              <h1>Explore, Discover, Learn</h1>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur corporis et, beatae sed dignissimos deleniti repellendus. Dolorem alias commodi aspernatur rem provident veniam asperiores obcaecati reiciendis ab. Repudiandae, minus eaque!
+              </p>
+              <p>
+                <a class="btn btn-lg btn-primary" href="#" role="button"
+                  >Visit now</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      
+      <!-- Marketing messaging and featurettes
+  ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div id="contacts-direct" class="container marketing">
+        <div class="row">
+            <!-- Member 1 (Your profile) -->
+    <div class="col-lg-4 col-md-6 mb-4 text-center">
+      <!-- Replace SVG with an image -->
+      <img src="/picture/WhatsApp Image 2024-10-03 at 05.54.46_3ea486f8.jpg " alt="Shourya Sunil Bharti" class="rounded-circle img-fluid" width="140" height="140" style="object-fit: cover; aspect-ratio: 1/1;">
+      <h2>Shourya Sunil Bharti</h2>
+
+      <!-- Gmail button -->
+      <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
+          onclick="window.open('https://add-gmail-link', '_blank');" 
+          onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+          <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail Logo" style="width: 30px; vertical-align: middle;">
+          <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">Gmail</span>
+      </div>
+
+      <!-- GitHub button -->
+      <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.8;" 
+          onclick="window.open('https://github.com/shourya666999', '_blank');" 
+          onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 30px; vertical-align: middle;">
+          <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">GitHub</span>
+      </div>
+            </div>
+          
+              
+           
+
+            <div class="col-lg-4 col-md-6 mb-4 text-center">
+              <!-- Replace SVG with an image -->
+              <img src="/picture/WhatsApp Image 2024-10-03 at 05.54.46_3ea486f8.jpg " alt="Piyush Sharma" class="rounded-circle img-fluid" width="140" height="140" style="object-fit: cover; aspect-ratio: 1/1;">
+              <h2>Piyush Sharma</h2>
+          
+              <!-- Gmail button -->
+              <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
+                  onclick="window.open('https://mail.google.com/mail/u/0/#search/piyushmanya157@gmail.com', '_blank');" 
+                  onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+                  onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+                  <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail Logo" style="width: 30px; vertical-align: middle;">
+                  <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">Gmail</span>
+              </div>
+          
+              <!-- GitHub button -->
+              <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.8;" 
+                  onclick="window.open('https://github.com/piiyush157', '_blank');" 
+                  onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+                  onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+                  <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 30px; vertical-align: middle;">
+                  <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">GitHub</span>
+              </div>
+          </div>
+          
+
+          <div class="col-lg-4 col-md-6 mb-4 text-center">
+            <!-- Replace SVG with an image -->
+            <img src="/picture/WhatsApp Image 2024-10-05 at 11.12.21_8d951074.jpg " alt="Prem Kumar" class="rounded-circle img-fluid" width="140" height="140" style="object-fit: cover; aspect-ratio: 1/1;">
+            <h2>Prem Kumar</h2>
+        
+            <!-- Gmail button -->
+            <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
+                onclick="window.open('https://mail.google.com/mail/u/0/#search/premkumar85212@gmail.com', '_blank');" 
+                onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+                <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail Logo" style="width: 30px; vertical-align: middle;">
+                <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">Gmail</span>
+            </div>
+        
+            <!-- GitHub button -->
+            <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.8;" 
+                onclick="window.open('https://github.com/Prem-6666', '_blank');" 
+                onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 30px; vertical-align: middle;">
+                <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">GitHub</span>
+            </div>
+        </div>
+        
+
+        <div class="col-lg-4 col-md-6 mb-4 text-center">
+          <!-- Replace SVG with an image -->
+          <img src="/picture/WhatsApp Image 2024-10-04 at 01.29.46_7f6797ef.jpg " alt="Krishna Gupta" class="rounded-circle img-fluid" width="140" height="140" style="object-fit: cover; aspect-ratio: 1/1;">
+          <h2>Krishna Gupta</h2>
+      
+          <!-- Gmail button -->
+          <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
+              onclick="window.open('https://mail.google.com/mail/u/0/#search/premkumar85212@gmail.com', '_blank');" 
+              onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+              <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail Logo" style="width: 30px; vertical-align: middle;">
+              <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">Gmail</span>
+          </div>
+      
+          <!-- GitHub button -->
+          <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.8;" 
+              onclick="window.open('https://github.com/Prem-6666', '_blank');" 
+              onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 30px; vertical-align: middle;">
+              <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">GitHub</span>
+          </div>
+      </div>
+      
+
+      <div class="col-lg-4 col-md-6 mb-4 text-center">
+        <!-- Replace SVG with an image -->
+        <img src="alyan-photo.jpg" alt="Alyan Alam" class="rounded-circle img-fluid" width="140" height="140" style="object-fit: cover; aspect-ratio: 1/1;">
+        <h2>Alyan Alam</h2>
+    
+        <!-- Gmail button -->
+        <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
+            onclick="window.location.href='https://mail.google.com';" 
+            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+            <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail Logo" style="width: 30px; vertical-align: middle;">
+            <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">Gmail</span>
+        </div>
+    
+        <!-- GitHub button -->
+        <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
+            onclick="window.location.href='https://github.com/your-username';" 
+            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)'; this.style.opacity='1';" 
+            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'; this.style.opacity='0.8';">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 30px; vertical-align: middle;">
+            <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">GitHub</span>
+        </div>
+    </div>
+    
+
+
+
+        <!-- /.row -->
+
+        <!-- START THE FEATURETTES -->
+
+        <div class="quiz-box" onclick="location.href='quiz.html';">
+          <h3>Start the Quiz</h3>
+          <p>Click here to begin your journey through the Chronicles of Exoplanet Exploration!</p>
+      </div>
+      
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider" />
+
+        <div id="project-direct" class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              First featurette heading.
+              <span class="text-muted">It’ll blow your mind.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+        <hr class="featurette-divider" />
+
+        <div id="about-direct" class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">
+              Oh yeah, it’s that good.
+              <span class="text-muted">See for yourself.</span>
+            </h2>
+            <p class="lead">
+              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+              ligula porta felis euismod semper. Praesent commodo cursus magna,
+              vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
+              commodo.
+            </p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+        <hr class="featurette-divider" />
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">
+              And lastly, this one. <span class="text-muted">Checkmate.</span>
+            </h2>
+            <div class="sketchfab-embed-wrapper"> <iframe title="exoplanet" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered src="https://sketchfab.com/models/29d33f6f6b204a19a4c2dd600819a8f7/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> </div>
+          </div>
+          <div class="col-md-5">
+            <svg
+              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+              width="500"
+              height="500"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Placeholder: 500x500"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
+              focusable="false"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#eee" />
+              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+            </svg>
+          </div>
+        </div>
+
+        <hr class="featurette-divider" />
+
+        <!-- /END THE FEATURETTES -->
+      </div>
+      <!-- /.container -->
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>
+          &copy; 2017-2020 Company, Inc. &middot;
+          <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
+
