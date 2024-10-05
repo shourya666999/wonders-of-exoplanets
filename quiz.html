@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicles of Exoplanet Exploration Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .navbar-custom .nav-link {
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-custom .nav-link:hover {
+            background-color: #495057;
+            color: #ffc107;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-container:hover {
+            transform: scale(1.02);
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .options label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-btn {
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .result {
+            display: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .correct-answer {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .incorrect-answer {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .explanation {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .timer {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="#">Exoplanet Quiz</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="quiz-container" id="quiz">
+        <!-- Questions will be loaded here dynamically -->
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <button class="btn nav-btn mr-2" id="prevBtn" onclick="prevQuestion()" disabled>Previous</button>
+        <button class="btn nav-btn ml-2" id="nextBtn" onclick="nextQuestion()" disabled>Next</button> <!-- Disabled by default -->
+    </div>
+    <div class="text-center mt-3">
+        <span>Questions Attempted: <span id="attempt-counter">0</span></span>
+    </div>
+    <div class="text-center mt-3 timer" id="timer">Time Left: 15s</div>
+    <div class="result" id="result"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const quizData = [
+    {
+        question: "What is an exoplanet?",
+        options: ["A planet that orbits a star outside our solar system", "A moon that orbits a planet in our solar system", "A star that is part of a binary system", "A comet that travels through the solar system"],
+        answer: 0,
+        explanation: "An exoplanet is a planet that orbits a star outside our solar system."
+    },
+    {
+        question: "Which was the first exoplanet discovered around a sun-like star?",
+        options: ["Kepler-22b", "51 Pegasi b", "Proxima Centauri b", "TRAPPIST-1e"],
+        answer: 1,
+        explanation: "51 Pegasi b was the first exoplanet discovered around a sun-like star."
+    },
+    {
+        question: "What method is commonly used to detect exoplanets by observing the dimming of a star's light?",
+        options: ["Radial velocity method", "Transit method", "Direct imaging", "Gravitational microlensing"],
+        answer: 1,
+        explanation: "The transit method detects exoplanets by observing the dimming of a star's light as a planet passes in front of it."
+    },
+    {
+        question: "Which space telescope has discovered the most exoplanets to date?",
+        options: ["Hubble Space Telescope", "James Webb Space Telescope", "Kepler Space Telescope", "Spitzer Space Telescope"],
+        answer: 2,
+        explanation: "The Kepler Space Telescope has discovered the most exoplanets to date."
+    },
+    {
+        question: "What is the habitable zone around a star?",
+        options: ["The region where liquid water can exist on a planet's surface", "The area where a star's radiation is the strongest", "The outermost region of a star's influence", "The zone where planets are most likely to have rings"],
+        answer: 0,
+        explanation: "The habitable zone is the region around a star where liquid water can exist on a planet's surface."
+    },
+    {
+        question: "What type of exoplanet is Kepler-456b?",
+        options: ["Hot Jupiter", "Super-Earth", "Rocky terrestrial planet", "Ice giant"],
+        answer: 1,
+        explanation: "Kepler-456b is a Super-Earth, a type of exoplanet larger than Earth but smaller than Neptune."
+    },
+    {
+        question: "What is the most common type of exoplanet discovered so far?",
+        options: ["Hot Jupiter", "Super-Earth", "Earth-like", "Mini-Neptune"],
+        answer: 1,
+        explanation: "Super-Earths are the most common type of exoplanet discovered so far."
+    },
+    {
+        question: "What does the term 'Hot Jupiter' refer to?",
+        options: ["A planet with a surface temperature higher than Earth's", "A large gas giant that orbits very close to its star", "A planet that is larger than Jupiter", "A planet that has rings like Saturn"],
+        answer: 1,
+        explanation: "A 'Hot Jupiter' is a large gas giant that orbits very close to its star."
+    },
+    {
+        question: "Which exoplanet is located in the habitable zone of its star and is one of the most Earth-like exoplanets discovered?",
+        options: ["Kepler-452b", "Proxima Centauri b", "TRAPPIST-1e", "Gliese 581g"],
+        answer: 0,
+        explanation: "Kepler-452b is located in the habitable zone of its star and is one of the most Earth-like exoplanets discovered."
+    },
+    {
+        question: "What is the radial velocity method?",
+        options: ["A technique to measure the speed of a star", "A method to detect exoplanets by observing their gravitational influence on their host star", "A method to directly image exoplanets", "A technique to measure the brightness of a star"],
+        answer: 1,
+        explanation: "The radial velocity method detects exoplanets by observing their gravitational influence on their host star."
+    },
+    {
+        question: "Which exoplanet system has seven Earth-sized planets orbiting a single star?",
+        options: ["TRAPPIST-1", "Kepler-186", "Gliese 581", "Proxima Centauri"],
+        answer: 0,
+        explanation: "The TRAPPIST-1 system has seven Earth-sized planets orbiting a single star."
+    },
+    {
+        question: "What is the significance of the discovery of Proxima Centauri b?",
+        options: ["It's the first exoplanet discovered", "It's the closest exoplanet to Earth", "It has the same mass as Earth", "It has a ring system"],
+        answer: 1,
+        explanation: "Proxima Centauri b is significant because it is the closest exoplanet to Earth."
+    },
+    {
+        question: "What is the purpose of the TESS mission?",
+        options: ["To study the Sun", "To search for exoplanets", "To map the Milky Way", "To explore Mars"],
+        answer: 1,
+        explanation: "The TESS mission's purpose is to search for exoplanets."
+    },
+    {
+        question: "What does the term 'Super-Earth' mean?",
+        options: ["A planet larger than Earth but smaller than Neptune", "A planet that supports advanced life forms", "A planet with rings like Saturn", "A planet with a strong magnetic field"],
+        answer: 0,
+        explanation: "A 'Super-Earth' is a planet larger than Earth but smaller than Neptune."
+    },
+    {
+        question: "Which exoplanet is known for having an extremely short orbital period of less than a day?",
+        options: ["Kepler-10b", "WASP-12b", "CoRoT-7b", "HD 209458b"],
+        answer: 2,
+        explanation: "CoRoT-7b is known for having an extremely short orbital period of less than a day."
+    },
+    {
+        question: "What is the 'Goldilocks Zone'?",
+        options: ["A region around a star where the temperature is just right for liquid water to exist", "The area around a star where planets form", "The outermost region of a star's influence", "The zone where stars are most likely to have planets"],
+        answer: 0,
+        explanation: "The 'Goldilocks Zone' is the region around a star where the temperature is just right for liquid water to exist."
+    },
+    {
+        question: "What does the term 'circumbinary planet' mean?",
+        options: ["A planet that orbits two stars", "A planet that orbits a black hole", "A planet that orbits a neutron star", "A planet that orbits a white dwarf"],
+        answer: 0,
+        explanation: "A 'circumbinary planet' is a planet that orbits two stars."
+    },
+    {
+        question: "What is the Kepler-452b often referred to as?",
+        options: ["Earth's Cousin", "Hot Jupiter", "Super-Earth", "Ice Giant"],
+        answer: 0,
+        explanation: "Kepler-452b is often referred to as 'Earth's Cousin' due to its similarities to Earth."
+    },
+    {
+        question: "Which technique involves measuring the bending of light by a planet's gravity?",
+        options: ["Transit method", "Radial velocity method", "Microlensing", "Direct imaging"],
+        answer: 2,
+        explanation: "Microlensing involves measuring the bending of light by a planet's gravity."
+    },
+    {
+        question: "What is the habitable zone sometimes referred to as?",
+        options: ["Goldilocks Zone", "Green Zone", "Safe Zone", "Life Zone"],
+        answer: 0,
+        explanation: "The habitable zone is sometimes referred to as the 'Goldilocks Zone'."
+    },
+];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let attempts = 0;
+        let timer;
+        let quizSubmitted = false; // Flag to track if the quiz has been submitted
+        const quizContainer = document.getElementById('quiz');
+        const resultContainer = document.getElementById('result');
+        const attemptCounter = document.getElementById('attempt-counter');
+        const timerDisplay = document.getElementById('timer');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn'); // Get reference to the Previous button
+
+        let userAnswers = []; // Array to store user answers
+
+        function loadQuiz() {
+            clearInterval(timer);
+            startTimer();
+            quizContainer.innerHTML = '';
+            const q = quizData[currentQuestion];
+            quizContainer.innerHTML = `
+                <h3>${q.question}</h3>
+                <div class="options">
+                    ${q.options.map((option, index) => `
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="option" value="${index}" onclick="enableNextButton()">
+                            ${option}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+
+            // Update button text
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Submit Quiz' : 'Next';
+
+            // Disable "Previous" button on the first question
+            prevBtn.disabled = currentQuestion === 0;
+            // Reset the selected option if the quiz is submitted
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                selectedOption.checked = false;
+            }
+        }
+
+        function enableNextButton() {
+            nextBtn.disabled = false; // Enable the Next button when an option is selected
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (selectedOption) {
+                const answer = parseInt(selectedOption.value);
+                userAnswers[currentQuestion] = answer; // Store the user's answer
+                if (answer === quizData[currentQuestion].answer) {
+                    score++;
+                }
+                if (!quizSubmitted) {
+                    attempts++; // Increase attempts count only if an option is selected and quiz not submitted
+                    attemptCounter.innerText = attempts; // Update attempts count display
+                }
+            }
+        }
+
+        function nextQuestion() {
+            if (!quizSubmitted) {
+                checkAnswer(); // Check the answer before moving to the next question
+                if (currentQuestion < quizData.length - 1) {
+                    currentQuestion++;
+                    loadQuiz();
+                } else {
+                    submitQuiz();
+                }
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuiz();
+            }
+        }
+
+        function showResult() {
+            let explanationList = '';
+            quizData.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.answer; // Check if the answer was correct
+                explanationList += `
+                    <div class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">
+                        Q${index + 1}: ${isCorrect ? 'Correct' : 'Incorrect'}
+                        <div class="explanation"><strong>Explanation:</strong> ${q.explanation}</div>
+                    </div>
+                `;
+            });
+            resultContainer.innerHTML = `
+                You scored ${score} out of ${quizData.length} <br>
+                <strong>Explanations:</strong>
+                <div>${explanationList}</div>
+            `;
+            resultContainer.style.display = 'block'; // Show the result container
+        }
+
+        function submitQuiz() {
+            clearInterval(timer);
+            if (!quizSubmitted) {
+                checkAnswer(); // Ensure the last answer is checked
+                showResult();
+                quizSubmitted = true; // Set the flag to indicate the quiz has been submitted
+                nextBtn.disabled = true; // Disable the Next button after submission
+                prevBtn.style.display = 'none'; // Hide the Previous button after submission
+            }
+        }
+
+        function startTimer() {
+            let timeLeft = 30;
+            timerDisplay.innerHTML = `Time Left: ${timeLeft}s`;
+            timer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.innerHTML = `Time Left: ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    alert("Time's up!");
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        loadQuiz(); // Load the first question
+    </script>
+</body>
+
+</html>
