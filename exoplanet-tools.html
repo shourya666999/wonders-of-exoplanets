@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Exploration Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .result.visible {
+            opacity: 1;
+        }
+
+        #graphContainer {
+            margin-top: 20px;
+        }
+
+        #graph {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Exoplanet Exploration Tools</h1>
+
+    <!-- Habitability Calculator -->
+    <div class="container">
+        <h2>Habitability Calculator</h2>
+        <form id="habitabilityForm">
+            <div class="form-group">
+                <label for="mass">Mass of Exoplanet (in Earth Masses):</label>
+                <input type="number" id="mass" required>
+            </div>
+            <div class="form-group">
+                <label for="distance">Distance from Star (in AU):</label>
+                <input type="number" id="distance" required>
+            </div>
+            <button type="submit">Calculate Habitability</button>
+        </form>
+        <div id="habitabilityResult" class="result"></div>
+        <canvas id="habitabilityGraph"></canvas>
+    </div>
+
+    <!-- Exoplanet Comparison Tool -->
+    <div class="container">
+        <h2>Exoplanet Comparison Tool</h2>
+        <form id="comparisonForm">
+            <div class="form-group">
+                <label for="exoplanet1Mass">Exoplanet 1 Mass (in Earth Masses):</label>
+                <input type="number" id="exoplanet1Mass" required>
+            </div>
+            <div class="form-group">
+                <label for="exoplanet1Distance">Exoplanet 1 Distance (in AU):</label>
+                <input type="number" id="exoplanet1Distance" required>
+            </div>
+            <div class="form-group">
+                <label for="exoplanet2Mass">Exoplanet 2 Mass (in Earth Masses):</label>
+                <input type="number" id="exoplanet2Mass" required>
+            </div>
+            <div class="form-group">
+                <label for="exoplanet2Distance">Exoplanet 2 Distance (in AU):</label>
+                <input type="number" id="exoplanet2Distance" required>
+            </div>
+            <button type="submit">Compare Exoplanets</button>
+        </form>
+        <div id="comparisonResult" class="result"></div>
+        <canvas id="comparisonGraph"></canvas>
+    </div>
+
+    <!-- Transit Method Probability Calculator -->
+    <div class="container">
+        <h2>Transit Method Probability Calculator</h2>
+        <form id="transitForm">
+            <div class="form-group">
+                <label for="transitMass">Mass of Exoplanet (in Jupiter Masses):</label>
+                <input type="number" id="transitMass" required>
+            </div>
+            <div class="form-group">
+                <label for="transitDistance">Distance from Star (in AU):</label>
+                <input type="number" id="transitDistance" required>
+            </div>
+            <button type="submit">Calculate Transit Probability</button>
+        </form>
+        <div id="transitResult" class="result"></div>
+        <canvas id="transitGraph"></canvas>
+    </div>
+
+    <!-- Light Curve Simulator -->
+    <div class="container">
+        <h2>Light Curve Simulator</h2>
+        <button id="simulateLightCurve">Simulate Light Curve</button>
+        <div id="lightCurve" class="result"></div>
+        <canvas id="lightCurveGraph" style="margin-top: 20px;"></canvas>
+    </div>
+
+    <!-- Orbit Stability Calculator -->
+    <div class="container">
+        <h2>Orbit Stability Calculator</h2>
+        <form id="stabilityForm">
+            <div class="form-group">
+                <label for="stabilityMass">Mass of Exoplanet (in Jupiter Masses):</label>
+                <input type="number" id="stabilityMass" required>
+            </div>
+            <div class="form-group">
+                <label for="stabilityDistance">Distance from Star (in AU):</label>
+                <input type="number" id="stabilityDistance" required>
+            </div>
+            <button type="submit">Check Stability</button>
+        </form>
+        <div id="stabilityResult" class="result"></div>
+        <canvas id="stabilityGraph"></canvas>
+    </div>
+
+    <!-- Atmospheric Composition Simulator -->
+    <div class="container">
+        <h2>Atmospheric Composition Simulator</h2>
+        <form id="atmosphericForm">
+            <div class="form-group">
+                <label for="atmPressure">Pressure (in Bar):</label>
+                <input type="number" id="atmPressure" required>
+            </div>
+            <div class="form-group">
+                <label for="atmTemperature">Temperature (in Kelvin):</label>
+                <input type="number" id="atmTemperature" required>
+            </div>
+            <button type="submit">Simulate Atmosphere</button>
+        </form>
+        <div id="atmosphericResult" class="result"></div>
+        <canvas id="atmosphericGraph"></canvas>
+    </div>
+
+    <!-- Custom Graphs/Charts Generator -->
+    <div class="container">
+        <h2>Custom Graphs/Charts Generator</h2>
+        <form id="graphForm">
+            <div class="form-group">
+                <label for="graphLabel">Label for the Graph:</label>
+                <input type="text" id="graphLabel" required>
+            </div>
+            <div class="form-group">
+                <label for="graphData">Data Points (comma separated):</label>
+                <input type="text" id="graphData" required>
+            </div>
+            <button type="submit">Generate Graph</button>
+        </form>
+        <div id="graphContainer">
+            <canvas id="graph"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Habitability Calculator
+        document.getElementById('habitabilityForm').onsubmit = function (event) {
+            event.preventDefault();
+            const mass = parseFloat(document.getElementById('mass').value);
+            const distance = parseFloat(document.getElementById('distance').value);
+            let score = (mass <= 2 && distance >= 0.5 && distance <= 2) ? 'Potentially Habitable' : 'Not Habitable';
+            const resultDiv = document.getElementById('habitabilityResult');
+            resultDiv.innerText = `Habitability Status: ${score}`;
+            resultDiv.classList.add('visible');
+            drawHabitabilityGraph(mass, distance);
+        }
+
+        function drawHabitabilityGraph(mass, distance) {
+            const ctx = document.getElementById('habitabilityGraph').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mass', 'Distance'],
+                    datasets: [{
+                        label: 'Exoplanet Parameters',
+                        data: [mass, distance],
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Exoplanet Comparison Tool
+        document.getElementById('comparisonForm').onsubmit = function (event) {
+            event.preventDefault();
+            const mass1 = parseFloat(document.getElementById('exoplanet1Mass').value);
+            const distance1 = parseFloat(document.getElementById('exoplanet1Distance').value);
+            const mass2 = parseFloat(document.getElementById('exoplanet2Mass').value);
+            const distance2 = parseFloat(document.getElementById('exoplanet2Distance').value);
+            const comparison = `Exoplanet 1: Mass = ${mass1}, Distance = ${distance1}\nExoplanet 2: Mass = ${mass2}, Distance = ${distance2}`;
+            const resultDiv = document.getElementById('comparisonResult');
+            resultDiv.innerText = comparison;
+            resultDiv.classList.add('visible');
+            drawComparisonGraph(mass1, distance1, mass2, distance2);
+        }
+
+        function drawComparisonGraph(mass1, distance1, mass2, distance2) {
+            const ctx = document.getElementById('comparisonGraph').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Mass', 'Distance'],
+                    datasets: [{
+                        label: 'Exoplanet 1',
+                        data: [mass1, distance1],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Exoplanet 2',
+                        data: [mass2, distance2],
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Transit Method Probability Calculator
+        document.getElementById('transitForm').onsubmit = function (event) {
+            event.preventDefault();
+            const mass = parseFloat(document.getElementById('transitMass').value);
+            const distance = parseFloat(document.getElementById('transitDistance').value);
+            const probability = (mass * 0.1) / (distance * distance);
+            const resultDiv = document.getElementById('transitResult');
+            resultDiv.innerText = `Transit Probability: ${probability.toFixed(4)}`;
+            resultDiv.classList.add('visible');
+            drawTransitGraph(mass, distance, probability);
+        }
+
+        function drawTransitGraph(mass, distance, probability) {
+            const ctx = document.getElementById('transitGraph').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mass', 'Distance', 'Probability'],
+                    datasets: [{
+                        label: 'Transit Method Probability',
+                        data: [mass, distance, probability],
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Light Curve Simulator
+        document.getElementById('simulateLightCurve').onclick = function () {
+            const resultDiv = document.getElementById('lightCurve');
+            resultDiv.innerText = "Simulating light curve...";
+            resultDiv.classList.add('visible');
+            simulateLightCurve();
+        }
+
+        function simulateLightCurve() {
+            const ctx = document.getElementById('lightCurveGraph').getContext('2d');
+            const times = [...Array(20).keys()]; // Simulate time from 0 to 19
+            const brightness = times.map(t => Math.sin(t * 0.3) + 1.5); // Simulated brightness
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: times,
+                    datasets: [{
+                        label: 'Brightness',
+                        data: brightness,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 3
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Orbit Stability Calculator
+        document.getElementById('stabilityForm').onsubmit = function (event) {
+            event.preventDefault();
+            const mass = parseFloat(document.getElementById('stabilityMass').value);
+            const distance = parseFloat(document.getElementById('stabilityDistance').value);
+            let stability = (mass / distance) > 0.1 ? 'Stable Orbit' : 'Unstable Orbit';
+            const resultDiv = document.getElementById('stabilityResult');
+            resultDiv.innerText = `Orbit Stability: ${stability}`;
+            resultDiv.classList.add('visible');
+            drawStabilityGraph(mass, distance);
+        }
+
+        function drawStabilityGraph(mass, distance) {
+            const ctx = document.getElementById('stabilityGraph').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Mass', 'Distance'],
+                    datasets: [{
+                        label: 'Orbit Stability',
+                        data: [mass, distance],
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Atmospheric Composition Simulator
+        document.getElementById('atmosphericForm').onsubmit = function (event) {
+            event.preventDefault();
+            const pressure = parseFloat(document.getElementById('atmPressure').value);
+            const temperature = parseFloat(document.getElementById('atmTemperature').value);
+            let composition = (pressure > 1 && temperature > 200) ? 'Possible Atmosphere' : 'Thin or No Atmosphere';
+            const resultDiv = document.getElementById('atmosphericResult');
+            resultDiv.innerText = `Atmospheric Composition: ${composition}`;
+            resultDiv.classList.add('visible');
+            drawAtmosphericGraph(pressure, temperature);
+        }
+
+        function drawAtmosphericGraph(pressure, temperature) {
+            const ctx = document.getElementById('atmosphericGraph').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pressure', 'Temperature'],
+                    datasets: [{
+                        label: 'Atmospheric Conditions',
+                        data: [pressure, temperature],
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+        // Custom Graphs/Charts Generator
+        const ctx = document.getElementById('graph').getContext('2d');
+        let myChart;
+
+        document.getElementById('graphForm').onsubmit = function (event) {
+            event.preventDefault();
+            const label = document.getElementById('graphLabel').value;
+            const dataPoints = document.getElementById('graphData').value.split(',').map(Number);
+
+            if (myChart) {
+                myChart.destroy(); // Destroy previous chart instance
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataPoints.map((_, index) => index + 1),
+                    datasets: [{
+                        label: label,
+                        data: dataPoints,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutBounce'
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

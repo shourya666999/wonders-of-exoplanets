@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Exploration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    /* boxs background */
+
+   
+    /* ... (rest of your CSS) ... */
+
+
+
+
+
+
+        body {
+            background-color: #20232a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        .planet-box {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px; /* Add some spacing between boxes */
+            display: flex;
+            flex-direction: column; /* Flex column for image and text */
+            height: auto; /* Let the height adjust based on content */
+        }
+        .planet-title {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: rgb(0,255, 255); /* Bootstrap primary color */
+        }
+        .planet-info {
+            font-size: 1rem;
+            color: #ffffff; /* Adjust text color */
+            overflow: hidden; /* Hide overflow initially */
+            transition: max-height 0.5s ease; /* Smooth transition for expanding */
+        }
+        .read-more {
+            cursor: pointer;
+            color: #0d6efd; /* Link color */
+            text-decoration: underline;
+            margin-top: 10px;
+            display: block; /* Ensure it's a block element */
+        }
+        .planet-image {
+            width: 100%; /* Responsive width */
+            height: auto; /* Keep aspect ratio */
+            max-height: 150px; /* Limit the height of the image */
+            border-radius: 5px; /* Slightly round corners of the image */
+            object-fit: cover; /* Cover the box without distortion */
+            margin-bottom: 10px; /* Space between image and title */
+        }
+        .extra-info {
+            max-height: 0; /* Initially hide extra info */
+            overflow-y: hidden; /* Hide overflow */
+            transition: max-height 0.5s ease; /* Smooth transition */
+            padding-top: 10px; /* Space above the extra info */
+        }
+        .extra-info.show {
+            max-height: 200px; /* Set a max height for the expanded content */
+            overflow-y: auto; /* Enable vertical scroll */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Exoplanet Exploration</h1>
+        <div class="row">
+            <!-- First 5 Exoplanet Boxes -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="planet-box">
+                            
+                            <div class="sketchfab-embed-wrapper"> <iframe title="Proxima Centauri B" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/0e2c2940095941478a83c62b2a04e344/embed"> </iframe> </div>
+                            <div class="planet-title">Proxima Centauri b</div>
+                            <div class="planet-info" id="info1">
+                                The closet known planet exoplanet to the Solar System and beleived to be a Earth-like planet.
+                                <span class="read-more" onclick="toggleReadMore('extra-info1', this)">Read More</span>
+                        
+                                <div class="extra-info" id="extra-info1">
+                                    <p><strong>i)</strong> Within the habitable zone of the red dwarf star Proxima Centauri.</p>
+                                    <p><strong>ii)</strong> Part of the larger triple star system Alpha Centauri.</p>
+                                    <p><strong>iii)</strong> 4.2 light-years (1.3 parsecs) from Earth.</p>
+                                    <p><strong>iv)</strong> Orbits its parent star at a distance of about 0.04856 AU.</p>
+                                    <p><strong>v)</strong> Orbital Period: 11.2 Earth days.</p>
+                                    <p><strong>vi)</strong> Minimum mass of at least 1.07 times Mass of Earth.</p>
+                                    <p><strong>vii)</strong> Mean radius = (0.94–1.4) times Radius of Earth.</p>
+                                    <p><strong>viii)</strong> Proxima Centauri b is unlikely to have any obliquity.</p>
+                                    <p><strong>ix)</strong> Likely to be tidally locked.
+                                    <p><strong>x)</strong> Receives about 65% of Earth's (ir)radiation.</p></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <div class="sketchfab-embed-wrapper"> <iframe title="Kepler-186f" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/c484b8b4aa9248b6998b6222d62f5a77/embed"> </iframe> </div>
+                            <div class="planet-title">Kepler-186f</div>
+                            <div class="planet-info" id="info2">
+                                The first planet with a radius similar to Earth.
+                                <span class="read-more" onclick="toggleReadMore('extra-info2', this)">Read more</span>
+                                <div class="extra-info" id="extra-info2">
+                                    
+                        <p><strong>i)</strong> Earth-sized exoplanet.</p>
+                        <p><strong>ii)</strong> Host Star: Red dwarf star Kepler-186.</p>
+                        <p><strong>iii)</strong> 580 light-years from Earth.</p>
+                        <p><strong>iv)</strong> Orbits its star at a distance of about 0.43 AU.</p>
+                        <p><strong>v)</strong> Orbital period: Roughly 130 days.</p>
+                        <p><strong>vi)</strong> Mass and radius around 1.44 and 1.17 times that of Earth.</p>
+                        <p><strong>vii)</strong> The first planet with a radius similar to Earth's to be discovered in the habitable zone of another star.</p>
+                        <p><strong>viii)</strong> Could be a rocky terrestrial planet or a lower density ocean planet with a thick atmosphere.</p>
+                        <p><strong>ix)</strong> Estimated equilibrium temperature for Kepler-186f, which is the surface temperature without an atmosphere, is said to be around 188 K.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <div class="sketchfab-embed-wrapper"> <iframe title="Image To Stl.com_lhs_1140_exoplanet_1005125605" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/fecfb06fd6904a5e8e7050712ca61b1f/embed"> </iframe> </div>
+                            <div class="planet-title">LHS 1140 B</div>
+                            <div class="planet-info" id="info3">
+                                Possibly consisting of nitrogen,water vapour,and carbon dioxide in the atmosphere.
+                                <span class="read-more" onclick="toggleReadMore('extra-info3', this)">Read more</span>
+                                <div class="extra-info" id="extra-info3">
+                                    <p><strong>i)</strong> Habitable zone of the red dwarf LHS 1140.</p>
+                                    <p><strong>ii)</strong> About 5.6 times the mass of Earth.</p>
+                                    <p><strong>iii)</strong> Mean radius (1.730±0.025) times the radius of Earth.</p>
+                                    <p><strong>iv)</strong> Initially thought to be a rocky planet, but later measurements indicate having less density and 9-19% water mass.</p>
+                                    <p><strong>vi)</strong> 49 light-years away.</p>
+                                    <p><strong>vii)</strong> Orbital period: 24.737 days.</p>
+                                    <p><strong>viii)</strong> Orbital radius is at 0.094 AU.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <img src="GJ 375 d.jpg" alt="Exoplanet 4" class="planet-image">
+                            <div class="planet-title">GJ 357d</div>
+                            <div class="planet-info" id="info4">
+                                'Super-Earth planet'..
+                                   
+                                <span class="read-more" onclick="toggleReadMore('extra-info4', this)">Read more</span>
+                                <div class="extra-info" id="extra-info4">
+                                    <p><strong>i)</strong> "Super-Earth" within the circumstellar habitable zone of its parent star.</p>
+                                    <p><strong>ii)</strong> 31 light-years from the Solar System.</p>
+                                    <p><strong>iii)</strong> Mass = (6.1±1.0) times the mass of Earth.</p>
+                                    <p><strong>iv)</strong> The average temperature is -64°F.</p>
+                                    <p><strong>v)</strong> Gliese 357 d is 20% closer to Gliese 357 than Earth is to the Sun. Since Gliese 357 is much smaller than the Sun, it receives as much energy as Mars.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <img src="K2-72e.jpg" alt="Exoplanet 5" class="planet-image">
+                            <div class="planet-title">K2 72e</div>
+                            <div class="planet-info" id="info5">
+                                Most probably tidely locked.
+                                <span class="read-more" onclick="toggleReadMore('extra-info5', this)">Read more</span>
+                                <div class="extra-info" id="extra-info5">
+                                 <p><strong>i)</strong> Orbiting within the habitable zone of the red dwarf star K2-72.</p>
+                                 <p><strong>ii)</strong> About 217.1 light-years (66.56 parsecs) from Earth.</p>
+                                 <p><strong>iii)</strong> Mean radius = (1.29 +0.14) times the radius of Earth.</p>
+                                 <p><strong>iv)</strong> Mass ~2.21 times the mass of Earth.</p>
+                                 <p><strong>v)</strong> Orbital period of 24 days and an orbital radius of about 0.1 times that of Earth's.</p>
+                                 <p><strong>vi)</strong> The exoplanet, along with K2-72c, was announced to be orbiting in the habitable zone of its parent star, the region where, with the correct conditions and atmospheric properties, liquid water may exist on the surface of the planet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second 5 Exoplanet Boxes -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <img src="K2 18b.jpg" alt="Exoplanet 6" class="planet-image">
+                            <div class="planet-title">K2 18b</div>
+                            <div class="planet-info" id="info6">
+                                Most likely tidally locked to star.
+                                <span class="read-more" onclick="toggleReadMore('extra-info6', this)">Read more</span>
+                                <div class="extra-info" id="extra-info6">
+                                    <p><strong>i)</strong> Orbiting the red dwarf K2-18.</p>
+                                    <p><strong>ii)</strong> 124 light-years (38 parsecs) away from Earth.</p>
+                                    <p><strong>iii)</strong> Mean radius = (2.610±0.087) times the radius of Earth.</p>
+                                     <p><strong>iv)</strong> 33-day orbit within the star's habitable zone.</p>
+                                     <p><strong>v)</strong> Mass = (8.63±1.35) times the mass of earth. .</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <div class="sketchfab-embed-wrapper"> <iframe title="Planet Trappist-1b" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/a790bd0a6db840b88446b80934391516/embed"> </iframe> </div>
+                            <div class="planet-title">TRAPPIST-1d</div>
+                            <div class="planet-info" id="info7">
+                                TRAPPIST-1d orbits the ultracool dwarf star TRAPPIST-1.
+                                <span class="read-more" onclick="toggleReadMore('extra-info7', this)">Read more</span>
+                                <div class="extra-info" id="extra-info7">
+                                    <p><strong>i)</strong> Host Star: ultra-cool dwarf star TRAPPIST-1.</p>
+                                    <p><strong>ii)</strong> 40 light-years away from Earth.</p>
+                                    <p><strong>iii)</strong> Smaller and less massive than Earth, with an estimated radius of about 0.77 times that of Earth and a mass of approximately 0.388 Earth masses.</p>
+                                    <p><strong>iv)</strong> Very close to its host star, completing one orbit in just about 4.05 Earth days. TRAPPIST-1 is much cooler than our Sun, so the planet receives similar levels of stellar radiation to what Earth receives from the Sun. Orbital radius (or semi-major axis) of approximately 0.021 astronomical units (AU).</p>
+                                    <p><strong>v)</strong> Located near the inner edge of the system's habitable zone.</p>
+                                    <p><strong>vi)</strong> Likely tidally locked.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <img src="HD 209458b.jpg" alt="Exoplanet 8" class="planet-image">
+                            <div class="planet-title">HD 209458b</div>
+                            <div class="planet-info" id="info8">
+                                Gas giant exoplanet, also known as a "hot Jupiter".
+                                <span class="read-more" onclick="toggleReadMore('extra-info8', this)">Read more</span>
+                                <div class="extra-info" id="extra-info8">
+                                    <p><strong>i)</strong> Host Star: F-type star.</p>
+                                    <p><strong>ii)</strong> About 150 light-years away in the constellation Pegasus.</p>
+                                    <p><strong>iii)</strong> Mass: Approximately 0.73 times the mass of Jupiter.</p>
+                                    <p><strong>iv)</strong> Radius: About 1.39 times the radius of Jupiter.</p>
+                                    <p><strong>v)</strong> Completes one orbit in about 3.5 days.</p>
+                                    <p><strong>vi)</strong> Orbital Radius: Approximately 0.04707 AU (astronomical units).</p>
+                                    <p><strong>vii)</strong> Discovery: Announced in 1999.</p>
+                                    <p><strong>viii)</strong> Discovery Method: Radial velocity.</p>
+                                    <p><strong>ix)</strong> Dayside temperature is around 1,226°C (2,239°F), and the nightside temperature is around 699°C (1,290°F).</p>
+                                    <p><strong>x)</strong> Observations have shown that the atmosphere is evaporating into space, losing hydrogen gas at a rate of at least 10,000 tonnes per second.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <img src="Wasp-121b.jpg" alt="Exoplanet 9" class="planet-image">
+                            <div class="planet-title">WASP-121b</div>
+                            <div class="planet-info" id="info9">
+                                First exoplanet found to contain water in an extrasolar planetary.
+                                <span class="read-more" onclick="toggleReadMore('extra-info9', this)">Read more</span>
+                                <div class="extra-info" id="extra-info9">
+                                    <p><strong>i)</strong> Host Star: F-type star.</p>
+                                    <p><strong>ii)</strong> About 0.02596 AU from its star.</p>
+                                    <p><strong>iii)</strong> Mass: Approximately 1.157 times the mass of Jupiter.</p>
+                                    <p><strong>iv)</strong> Radius: About 1.753 times the radius of Jupiter.</p>
+                                    <p><strong>v)</strong> Completes one orbit in about 1.3 days.</p>
+                                    <p><strong>vi)</strong> Discovery: Announced in 2016.</p>
+                                    <p><strong>vii)</strong> Discovery Method: Transit.</p>
+                                    <p><strong>viii)</strong> Surface temperature: Approximately 2,602 K (2,329°C; 4,224°F).</p>
+                                    <p><strong>ix)</strong> Observations have shown that the atmosphere is losing magnesium and iron gas into space. </P>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="planet-box">
+                            <div class="sketchfab-embed-wrapper"> <iframe title="55 Cancri e, a fiery volcanic extrasolar planet" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/be5ae5f6031f4b1c899c8e9107fcdf9f/embed?ui_infos=0"> </iframe> </div>
+                            <div class="planet-title">55 canceri e</div>
+                            <div class="planet-info" id="info10">
+                                Known for its high density and close proximity to its parent star. 
+                                <span class="read-more" onclick="toggleReadMore('extra-info10', this)">Read more</span>
+                                <div class="extra-info" id="extra-info10">
+                                    <p><strong>i)</strong> Host Star: 55 Cancri A.</p>
+                                    <p><strong>ii)</strong> About 0.015 astronomical units (AU) from its star.</p>
+                                    <p><strong>iii)</strong> Mass: Approximately 7.99 times the mass of Earth.</p>
+                                    <p><strong>iv)</strong> Radius: About 1.875 times the radius of Earth.</p>
+                                    <p><strong>v)</strong> Completes one orbit in about 0.7 days.</p>
+                                    <p><strong>vi)</strong> Discovery: Announced in 2004.</p>
+                                    <p><strong>vii)</strong> Discovery Method: Radial velocity.</p>
+                                    <p><strong>viii)</strong> Surface temperature: Approximately 2,700°C (4,900°F).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleReadMore(infoId, element) {
+            const extraInfo = document.getElementById(infoId);
+            if (extraInfo.classList.contains("show")) {
+                // Collapse
+                extraInfo.classList.remove("show");
+                element.innerText = 'Read more';
+            } else {
+                // Expand
+                extraInfo.classList.add("show");
+                element.innerText = 'Read less';
+            }
+        }
+    </script>
+    <footer class="container">
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>
+        &copy; 2017-2020 Company, Inc. &middot;
+        <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+      </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanets Exploration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #9fadcb;
+            color: #6d5656;
+            font-family: Arial, sans-serif;
+        }
+
+        .chart-container {
+            margin: 20px auto;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-container:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4">Exoplanets Exploration Graphs</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetBarChart"></canvas>
+                    <p><strong>Bar Chart:</strong> This chart shows the number of exoplanets discovered each year from 2010 to 2016.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetLineChart"></canvas>
+                    <p><strong>Line Chart:</strong> This chart illustrates the temperature (in Kelvin) of various exoplanets over a set range.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetPieChart"></canvas>
+                    <p><strong>Pie Chart:</strong> This chart displays the percentage distribution of different types of exoplanets, such as Rocky, Gaseous, Ice Giant, and Super-Earth.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetRadarChart"></canvas>
+                    <p><strong>Radar Chart:</strong> This chart represents various planetary features like temperature, atmospheric pressure, gravity, orbital radius, and mass.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetScatterPlot"></canvas>
+                    <p><strong>Scatter Plot:</strong> This chart shows the relationship between the mass (in Jupiter masses) and radius (in Jupiter radii) of exoplanets.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetHistogram"></canvas>
+                    <p><strong>Histogram:</strong> This histogram shows the distribution of exoplanet sizes (Earth-sized, Super-Earth, etc.).</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetHabitabilityChart"></canvas>
+                    <p><strong>Bar Chart:</strong> This chart shows the habitability scores for different exoplanets based on various criteria.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetAtmosphericChart"></canvas>
+                    <p><strong>Stacked Bar Chart:</strong> This chart shows the composition of atmospheres for different exoplanets.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="exoplanetBubbleChart"></canvas>
+                    <p><strong>Bubble Chart:</strong> This chart illustrates the discovery of exoplanets over time, with bubble sizes representing the mass of the planets.</p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exoplanetData = {
+            bar: {
+                labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+                data: [20, 35, 45, 55, 70, 85, 100]
+            },
+            line: {
+                labels: ['0', '1', '2', '3', '4', '5', '6'],
+                data: [300, 280, 270, 260, 250, 240, 230]
+            },
+            pie: {
+                labels: ['Rocky', 'Gaseous', 'Ice Giant', 'Super-Earth'],
+                data: [25, 50, 15, 10]
+            },
+            radar: {
+                labels: ['Temperature', 'Atmospheric Pressure', 'Gravity', 'Orbital Radius', 'Mass'],
+                data: [1500, 1.2, 1.0, 0.7, 1.5]
+            },
+            scatter: [
+                { x: 1, y: 1 },
+                { x: 2, y: 4 },
+                { x: 3, y: 2 },
+                { x: 4, y: 5 },
+                { x: 5, y: 3 },
+                { x: 6, y: 6 },
+            ],
+            histogram: {
+                labels: ['Earth-sized', 'Super-Earth', 'Gas Giant', 'Neptune-like'],
+                data: [50, 30, 15, 5]
+            },
+            habitability: {
+                labels: ['Exoplanet A', 'Exoplanet B', 'Exoplanet C', 'Exoplanet D'],
+                data: [8, 6, 5, 9]
+            },
+            atmospheric: {
+                labels: ['Nitrogen', 'Oxygen', 'Carbon Dioxide'],
+                data: [
+                    { label: 'Exoplanet A', data: [60, 30, 10] },
+                    { label: 'Exoplanet B', data: [40, 40, 20] },
+                    { label: 'Exoplanet C', data: [20, 50, 30] },
+                ]
+            },
+            bubble: [
+                { x: 1, y: 20, r: 15 },
+                { x: 2, y: 30, r: 10 },
+                { x: 3, y: 40, r: 20 },
+                { x: 4, y: 50, r: 25 },
+                { x: 5, y: 60, r: 30 }
+            ],
+            heatmap: {
+                labels: ['1', '2', '3', '4', '5', '6', '7'],
+                data: [
+                    [1, 1, 2, 3, 4, 5],
+                    [2, 2, 4, 6, 8, 10],
+                    [3, 3, 6, 9, 12, 15],
+                    [4, 4, 8, 12, 16, 20],
+                    [5, 5, 10, 15, 20, 25],
+                    [6, 6, 12, 18, 24, 30]
+                ]
+            }
+        };
+
+        function createCharts() {
+            // Bar Chart
+            new Chart(document.getElementById('exoplanetBarChart'), {
+                type: 'bar',
+                data: {
+                    labels: exoplanetData.bar.labels,
+                    datasets: [{
+                        label: 'Number of Exoplanets',
+                        data: exoplanetData.bar.data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Line Chart
+            new Chart(document.getElementById('exoplanetLineChart'), {
+                type: 'line',
+                data: {
+                    labels: exoplanetData.line.labels,
+                    datasets: [{
+                        label: 'Temperature (K)',
+                        data: exoplanetData.line.data,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+
+            // Pie Chart
+            new Chart(document.getElementById('exoplanetPieChart'), {
+                type: 'pie',
+                data: {
+                    labels: exoplanetData.pie.labels,
+                    datasets: [{
+                        label: 'Exoplanet Types',
+                        data: exoplanetData.pie.data,
+                        backgroundColor: [
+                            'rgba(255, 205, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+
+            // Radar Chart
+            new Chart(document.getElementById('exoplanetRadarChart'), {
+                type: 'radar',
+                data: {
+                    labels: exoplanetData.radar.labels,
+                    datasets: [{
+                        label: 'Planetary Features',
+                        data: exoplanetData.radar.data,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+
+            // Scatter Plot
+            new Chart(document.getElementById('exoplanetScatterPlot'), {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Mass vs. Radius',
+                        data: exoplanetData.scatter,
+                        backgroundColor: 'rgba(75, 192, 192, 1)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Mass (Jupiter Masses)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Radius (Jupiter Radii)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Histogram
+            new Chart(document.getElementById('exoplanetHistogram'), {
+                type: 'bar',
+                data: {
+                    labels: exoplanetData.histogram.labels,
+                    datasets: [{
+                        label: 'Exoplanet Sizes',
+                        data: exoplanetData.histogram.data,
+                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Habitability Chart
+            new Chart(document.getElementById('exoplanetHabitabilityChart'), {
+                type: 'bar',
+                data: {
+                    labels: exoplanetData.habitability.labels,
+                    datasets: [{
+                        label: 'Habitability Scores',
+                        data: exoplanetData.habitability.data,
+                        backgroundColor: 'rgba(255, 159, 64, 0.5)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Atmospheric Composition Chart
+            new Chart(document.getElementById('exoplanetAtmosphericChart'), {
+                type: 'bar',
+                data: {
+                    labels: exoplanetData.atmospheric.labels,
+                    datasets: exoplanetData.atmospheric.data.map((d, i) => ({
+                        label: d.label,
+                        data: d.data,
+                        backgroundColor: `rgba(${i * 50}, 159, 64, 0.5)`,
+                        stack: 'Stack 0',
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Bubble Chart
+            new Chart(document.getElementById('exoplanetBubbleChart'), {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: 'Exoplanet Discoveries',
+                        data: exoplanetData.bubble,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Discoveries'
+                            }
+                        }
+                    }
+                }
+            });
+          }
+            // Heatmap
+          
+        // Create charts on window load
+        window.onload = createCharts;
+
+    </script>
+</body>
+
+</html>
