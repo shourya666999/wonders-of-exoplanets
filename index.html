@@ -9,7 +9,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.72.0" />
-    <title>Chronicles of Exoplanet Exploration</title>
+    <title>Wonders of Exoplanet</title>
 
     <link
       rel="canonical"
@@ -53,9 +53,9 @@
 
       /* toolkit */
       .redirect-box {
-        background-color: #fff;
+        background-color: #fcfbfb;
         border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 10px rgba(255, 254, 254, 0.15);
         padding: 30px;
         text-align: center;
         height: 100%;
@@ -79,13 +79,13 @@
 
     .redirect-box h3 {
         font-size: 24px;
-        color: #007bff;
+        color: #8aaacb;
         margin-bottom: 10px;
     }
 
     .redirect-box p {
         font-size: 16px;
-        color: #555;
+        color: #5b5959;
     }
 
       /* GLOBAL STYLES
@@ -139,10 +139,10 @@
 .exoplanet-link-box {
   position: relative;
   width: 100%;
-  border: 2px solid #4CAF50;
+  border: 2px solid #2d332d;
   padding: 20px;
   text-align: center;
-  background: linear-gradient(120deg, #4CAF50 50%, #ffffff 50%); /* Two distinct sections of color */
+  background: linear-gradient(120deg, #4CAF50 50%, #393434 50%); /* Two distinct sections of color */
   background-size: 200% 100%; /* Make the background larger for sliding */
   transition: background-position 0.6s ease-in-out; /* Smooth background movement */
 }
@@ -168,7 +168,39 @@
 }
 
 
+     /* another exolpanet link */
 
+
+     .exoplanet-link1-box {
+  position: relative;
+  width: 100%;
+  border: 2px solid #2d332d;
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(120deg, #4CAF50 50%, #393434 50%); /* Two distinct sections of color */
+  background-size: 200% 100%; /* Make the background larger for sliding */
+  transition: background-position 0.6s ease-in-out; /* Smooth background movement */
+}
+
+.exoplanet-link1-box a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.exoplanet-link1-box h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.exoplanet-link1-box p {
+  margin: 10px 0 0;
+  font-size: 16px;
+}
+
+/* Background slide effect on hover */
+.exoplanet-link1-box:hover {
+  background-position: -100% 0; /* Slide the background to the left */
+}
 
 
 
@@ -177,7 +209,7 @@
       body {
         padding-top: 3rem;
         padding-bottom: 3rem;
-        color: #434242;
+        color: #fdfbfb;
       }
 
       /* CUSTOMIZE THE CAROUSEL
@@ -266,7 +298,7 @@
 
     .redirect-box p {
         margin: 0;
-        color: #555;
+        color: #626161;
     }
 
     /* Animation on page load */
@@ -387,6 +419,74 @@
           margin-top: 7rem;
         }
       }
+
+       /* Full-screen video background */
+       .video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+
+        /* imglinkbox */
+
+        .exoplanet-link-box {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  max-width: 300px; /* Set a max-width for the box */
+  margin: 20px auto; /* Center the box with margin */
+  padding: 10px;
+  border: 1px solid #ccc; /* Optional: border for the box */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
+}
+
+.exoplanet-link-box img {
+  width: 100%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional: rounded corners for the image */
+  margin-bottom: 10px; /* Space between the image and the content */
+}
+
+.content {
+  text-align: center; /* Center text in the content area */
+}
+
+.content h3 {
+  font-size: 1.5em; /* Adjust font size for headings */
+  margin: 10px 0; /* Space around heading */
+}
+
+.content p {
+  font-size: 1em; /* Base font size for paragraph */
+  margin-bottom: 10px; /* Space below paragraph */
+}
+
+.content a {
+  text-decoration: none; /* Remove underline from the link */
+  color: #007BFF; /* Change link color */
+  font-weight: bold; /* Make the link bold */
+}
+
+
+      
+
+
     </style>
 
     <!-- Custom styles for this template -->
@@ -394,10 +494,16 @@
   </head>
 
   <body>
+
+    <video autoplay muted loop class="video-background">
+      <source src="astroids.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+    
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Centaurus-A</a>
+          <a class="navbar-brand" href="#">Wonders of Exoplanet</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -429,6 +535,9 @@
     </header>
 
     <main>
+
+      
+
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -493,6 +602,9 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
+
+
+      
       
       <!-- Marketing messaging and featurettes
   ================================================== -->
@@ -606,7 +718,7 @@
       <div class="col-lg-4 col-md-6 mb-4 text-center">
         <!-- Replace SVG with an image -->
         <img src="alyan-photo.jpg" alt="Alyan Alam" class="rounded-circle img-fluid" width="140" height="140" style="object-fit: cover; aspect-ratio: 1/1;">
-        <h2>Alyan Alam</h2>
+        <h2>Tia Ahuja</h2>
     
         <!-- Gmail button -->
         <div style="border: 1px solid #ddd; padding: 10px; display: inline-block; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; opacity: 0.8;" 
@@ -626,6 +738,8 @@
             <span style="font-family: Arial, sans-serif; font-size: 16px; margin-left: 10px;">GitHub</span>
         </div>
     </div>
+
+  
     
 
 
@@ -636,10 +750,18 @@
         <hr class="featurette-divider" />
 
         
-        <div class="quiz-box" onclick="location.href='quiz.html';">
-          <h3>Start the Quiz</h3>
-          <p>Click here to begin your journey through the Chronicles of Exoplanet Exploration!</p>
+      <div class="exoplanet-container">
+        <h2> Exoplanet Exploration Quiz</h2>
+        <p>Test your knowledge about the fascinating worlds beyond our solar system! This quiz will challenge you with questions about the discovery, characteristics, and significance of exoplanets by clicking the link below.</p>
+        <div class="exoplanet-link-box">
+          <a href="quiz.html" target="_blank">
+            <h3>start the quiz</h3>
+            <p></p>
+          </a>
+        </div>
       </div>
+        
+        
       
       <hr class="featurette-divider" />
 
@@ -649,8 +771,8 @@
         <h2>Discover the Wonders of Exoplanets</h2>
         <p>Exoplanets are planets that orbit stars outside our solar system. Learn more about these fascinating worlds by clicking the link below.</p>
         
-        <div class="exoplanet-link-box">
-          <a href="info.html">
+        <div class="exoplanet-link1-box">
+          <a href="info.html" target="_blank">
             <h3>Explore Exoplanets</h3>
             <p>Discover fascinating information about exoplanets.</p>
           </a>
@@ -668,24 +790,27 @@
         <div id="project-direct" class="row featurette">
           <div class="col-md-7">
               <h2 class="featurette-heading">
-                  First featurette heading.
-                  <span class="text-muted">It’ll blow your mind.</span>
+              Explore Exoplanet Research
               </h2>
               <p class="lead">
-                  Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. 
-                  Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+                
+             <p>Dive into our collection of visually stunning graphs showcasing the latest discoveries and trends in exoplanet research. These graphs illustrate vital data, including the distribution of exoplanet types, their orbital characteristics, and the factors influencing their habitability.</p>
+    
+             <p>Whether you're a space enthusiast or a researcher, these insights will deepen your understanding of the diverse worlds beyond our solar system.</p>
               </p>
           </div>
       
           <!-- Replacing the image with a professional box that redirects -->
-          <div class="col-md-5">
-              <div class="redirect-box" onclick="window.location.href='exoplanet-tools.html';">
-                  <div class="box-content">
-                      <h3>Explore Exoplanet Research</h3>
-                      <p>Click here to learn more about the latest exoplanet discoveries.</p>
-                  </div>
-              </div>
+          <div class="exoplanet-link-box">
+            <img src="041018_LG_TESS_feat.webp" alt="Exoplanet Graphs" />
+            <div class="content">
+              <h3>Explore</h3>
+              <p>Dive into our curated collection of cutting-edge research and visually stunning graphs that illuminate the latest discoveries in the field of exoplanet studies<p>
+              <a href="exoplanet-tools.html" target="_blank">View</a>
+            </div>
           </div>
+
+
       </div>
       
       <hr class="featurette-divider" />
@@ -693,23 +818,27 @@
       <div id="charts-direct" class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">
-                Data Visualization with Charts.
-                <span class="text-muted">See the universe in numbers.</span>
+              <h2 class="featurette-heading"> Explore Exoplanet Charts</h2>
             </h2>
             <p class="lead">
-                Understand exoplanetary data with these interactive charts. Click the box to explore different types of exoplanet data visualizations.
+              <p>Immerse yourself in our collection of dynamic charts that visualize the latest trends and discoveries in exoplanet research.</p>
+    
+    <p>Whether you're a space enthusiast or a researcher, these insights will deepen your understanding of the diverse worlds beyond our solar system.</p>
             </p>
         </div>
     
         <!-- Box for Charts with sliding animation -->
-        <div class="col-md-5">
-            <div class="charts-box" onclick="window.location.href='chart.html';">
-                <div class="box-content">
-                    <h3>Explore Exoplanet Charts</h3>
-                    <p>Visualize key data points about exoplanets.</p>
-                </div>
-            </div>
+        <div class="exoplanet-link-box">
+          <img src="GJ 375 d.jpg" alt="Exoplanet Graphs" />
+          <div class="content">
+            <h3>Explore the Solar System</h3>
+            <p>Embark on a captivating journey through our solar system! This interactive feature allows you to discover the unique characteristics of each exoplanet.</p>
+            <a href="chart.html" target="_blank">View </a>
+          </div>
         </div>
+    
+    
+
     </div>
     
     <hr class="featurette-divider" />
@@ -717,57 +846,63 @@
     <div id="project-direct" class="row featurette">
       <div class="col-md-7">
           <h2 class="featurette-heading">
-              First featurette heading.
-              <span class="text-muted">It’ll blow your mind.</span>
+            Explore the Milky Way Galaxy.
           </h2>
           <p class="lead">
-              Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. 
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-          </p>
+            Dive into the fascinating realms of our Milky Way Galaxy! This interactive feature allows you to journey through the planets, moons, and other celestial bodies that orbit our Sun. Discover the unique characteristics of each planet, from the scorching heat of Mercury to the icy depths of Neptune. Learn about the stunning landscapes, atmospheres, and potential for life beyond Earth. Join us on this cosmic adventure and unravel the mysteries of our celestial neighborhood!</p>
       </div>
   
       <!-- Redirect Box with Slide Animation -->
-      <div class="col-md-5">
-          <div class="redirect-box">
-              <a href="embedding.html" class="redirect-link">
-                  <h3>Explore Solar System</h3>
-                  <p>Click here to view the Solar System in an interactive format.</p>
-              </a>
-          </div>
+      <div class="exoplanet-link-box">
+        <img src="GJ 375 d.jpg" alt="Exoplanet Graphs" />
+        <div class="content">
+          <h3>Explore the Solar system</h3>
+          <p>Dive into our collection of exoplanets into a specific.</p>
+          <a href="embedding.html" target="_blank">View </a>
+        </div>
       </div>
-  </div>
+  
   
   <hr class="featurette-divider" />
 
 
+  <div id="project-direct" class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">
+          Lagrangian Points: The Balancing Act of Space
+        </h2>
+        <p class="lead">
+          <p>Have you ever wondered how spacecraft maintain their positions in space with minimal fuel? Enter the fascinating world of Lagrangian points! These unique locations in space are where the gravitational forces of two large celestial bodies—like the Earth and the Moon—create a delicate balance with the centrifugal force experienced by a smaller object.</p>
+    
+          <p>There are five Lagrangian points, each offering a different vantage point for observation and exploration:</p>
+          
+          <p><strong>L1:</strong> Perfect for monitoring the Sun without interruptions from Earth’s atmosphere, ideal for solar observatories.</p>
+          <p><strong>L2:</strong> Located beyond the smaller body, this point is perfect for space telescopes that require a clear view of deep space.</p>
+          <p><strong>L3:</strong> Positioned on the opposite side of the larger body, it’s a less common spot due to its instability.</p>
+          <p><strong>L4 and L5:</strong> These stable points form equilateral triangles with the two large bodies, making them excellent locations for satellites and space missions.</p>
+          
+          <p>Discover how these points contribute to efficient space exploration and satellite positioning.</p>
+          
+         <h5><p>Learn more about Lagrangian points here!</p></h5>
+                     
+        </p>
+    </div>
+       
+    
+    <div class="exoplanet-link-box">
+      <img src="Wasp-121b.jpg" alt="Exoplanet Graphs" />
+      <div class="content">
+        <h3>Explore the Lagrangian piont</h3>
+        <p>Delve into the intriguing concept of Lagrangian points.</p>
+        <a href="langrangian.html" target="_blank">View</a>
+      </div>
+    </div>
 
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">
-              And lastly, this one. <span class="text-muted">Checkmate.</span>
-            </h2>
-           
-          </div>
-          <div class="col-md-5">
-            <svg
-              class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              width="500"
-              height="500"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-label="Placeholder: 500x500"
-              preserveAspectRatio="xMidYMid slice"
-              role="img"
-              focusable="false"
-            >
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#eee" />
-              <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-            </svg>
-          </div>
-        </div>
 
-        <hr class="featurette-divider" />
+<hr class="featurette-divider" />
 
+
+        
         <!-- /END THE FEATURETTES -->
       </div>
       <!-- /.container -->
@@ -776,8 +911,7 @@
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
         <p>
-          &copy; 2017-2020 Company, Inc. &middot;
-          <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+          <a href="#https://exoplanets.nasa.gov/eyes-on-exoplanets/" target="_blank">nasa eyes on exoplanet</a> &middot; <a href="#https://exoplanets.nasa.gov/" target="_blank">exoplanets-archive-nasa</a>
         </p>
       </footer>
     </main>
