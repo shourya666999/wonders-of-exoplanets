@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lagrangian Points and Exoplanet Exploration</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #7faedd; /* Changed to a background color */
+            color: rgb(55, 51, 51);
+        }
+
+        .featurette {
+            margin-bottom: 50px;
+        }
+
+        .lagrangian-point-box {
+            transition: transform 0.5s ease;
+            border: 1px solid #454040;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            background-color: rgba(207, 194, 194, 0.8);
+        }
+
+        .lagrangian-point-box:hover {
+            transform: scale(1.05);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: auto;
+        }
+
+        .calculator {
+            background-color: rgba(32, 26, 26, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .interactive-module {
+            background-color: rgba(125, 121, 121, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .divider {
+            border-top: 1px solid #555252;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Exploring Lagrangian Points and Exoplanets</h1>
+        <hr class="divider">
+        <!-- Lagrangian Points Overview -->
+        <div class="row featurette">
+            <div class="col-md-6">
+                <h2 class="featurette-heading">Lagrangian Points Overview</h2>
+                <p class="lead">Lagrangian points are positions in space where the gravitational forces of two large bodies, such as the Earth and the Sun, create regions where a smaller object can remain in equilibrium.</p>
+                <p class="lead">There are five Lagrangian points in any two-body system:</p>
+                <ul>
+                    <li><strong>L1:</strong> Located between the two large bodies. It is ideal for observing the Sun from space, as used by solar observatories like the SOHO spacecraft.</li>
+                    <li><strong>L2:</strong> Positioned behind the smaller body, this point is shielded from the Sun, making it perfect for deep space missions, such as the James Webb Space Telescope, which will observe the universe's early galaxies.</li>
+                    <li><strong>L3:</strong> Located on the opposite side of the Sun from Earth, this point is rarely used but offers unique orbital characteristics for certain missions.</li>
+                    <li><strong>L4 and L5:</strong> These points form stable equilateral triangles with the two large bodies. Their stability makes them suitable for long-term space missions and potential space colonies in the future.</li>
+                </ul>
+                <p class="lead">These points are vital for missions requiring a stable position with minimal fuel use, allowing for long-term observations and research. Understanding the dynamics of Lagrangian points is essential for future space exploration.</p>
+            </div>
+            <div class="col-md-6 lagrangian-point-box">
+                <div id="lagrange-visualization" class="chart-container">
+                    <canvas id="lagrangeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Habitable Zones -->
+        <div class="row featurette">
+            <div class="col-md-6">
+                <h2 class="featurette-heading">Habitable Zones</h2>
+                <p class="lead">A "habitable zone" refers to the region around a star where conditions are just right for liquid water to exist, a key requirement for life as we know it.</p>
+                <p class="lead">The position of the habitable zone depends on the star’s size and temperature. For hotter, more massive stars, the habitable zone is farther away, while for cooler, smaller stars, it is closer.</p>
+                <p class="lead">Lagrangian points, particularly L2, play a critical role in studying exoplanets within habitable zones. By placing telescopes at these points, astronomers can make long-term, stable observations of distant star systems, searching for planets with Earth-like conditions.</p>
+                <p class="lead">In the context of exoplanet exploration, Lagrangian points offer strategic positions to observe planetary atmospheres, detect potential signs of life, and study the star systems with minimal interference from the host star’s light.</p>
+                <p class="lead">As we continue the search for life beyond our solar system, understanding the relationship between habitable zones and Lagrangian points will help in designing future missions aimed at discovering new worlds.</p>
+            </div>
+            <div class="col-md-6 lagrangian-point-box">
+                <h2 class="featurette-heading">Examples of Exoplanets in Habitable Zones</h2>
+                <ul class="lead">
+                    <li><strong>Proxima Centauri b:</strong> Orbiting the nearest star to our solar system, this exoplanet is within the habitable zone and could potentially harbor life.</li>
+                    <li><strong>Kepler-452b:</strong> Often referred to as "Earth's cousin," this exoplanet resides in the habitable zone of its parent star and shares many Earth-like features.</li>
+                    <li><strong>TRAPPIST-1 system:</strong> This system contains multiple planets within the habitable zone, raising the potential for finding diverse environments suitable for life.</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Calculator for Lagrangian Points -->
+        <div class="row featurette">
+            <div class="col-md-12 calculator">
+                <h3>Calculate Lagrangian Point Position</h3>
+                <form id="lagrangeCalculator" onsubmit="return calculateLagrangePoints(event)">
+                    <div class="form-group">
+                        <label for="mass1">Mass of Body 1 (kg):</label>
+                        <input type="number" id="mass1" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mass2">Mass of Body 2 (kg):</label>
+                        <input type="number" id="mass2" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="distance">Distance between Bodies (m):</label>
+                        <input type="number" id="distance" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Calculate L1 Position</button>
+                </form>
+                <p id="lagrangeResult" class="mt-3"></p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Lagrangian Point Missions -->
+        <div class="row featurette">
+            <div class="col-md-6 lagrangian-point-box">
+                <h2 class="featurette-heading">Lagrangian Point Missions</h2>
+                <p class="lead">Missions that utilize Lagrangian points include:</p>
+                <ul>
+                    <li><strong>James Webb Space Telescope (JWST):</strong> Positioned at L2, it will observe the universe's formation and analyze exoplanet atmospheres.</li>
+                    <li><strong>SOHO (Solar and Heliospheric Observatory):</strong> Located at L1, it continuously monitors solar activity and provides early warnings for solar storms that could impact Earth.</li>
+                    <li><strong>Herschel Space Observatory:</strong> Also at L2, this mission studied the universe in the infrared, observing distant galaxies and star formation.</li>
+                </ul>
+                <p class="lead">These missions take advantage of the stable gravitational environment at Lagrangian points, allowing for uninterrupted observations and minimizing fuel consumption for maintaining position. The strategic placement of instruments at these points enables scientists to conduct long-term studies of celestial phenomena, enhancing our understanding of the universe.</p>
+            </div>
+            <div class="col-md-6 lagrangian-point-box">
+                <h2 class="featurette-heading">Conceptual Design for Space Habitats</h2>
+                <p class="lead">The design of space habitats at Lagrangian points focuses on sustainability, efficiency, and scientific research. Potential features include:</p>
+                <ul>
+                    <li><strong>Self-Sustaining Ecosystems:</strong> Utilizing hydroponics and aquaponics for food production, along with closed-loop water systems to recycle resources.</li>
+                    <li><strong>Research Facilities:</strong> Laboratories equipped for astrobiology, materials science, and astronomical observations, allowing for multidisciplinary research.</li>
+                    <li><strong>Energy Generation:</strong> Solar panels and energy storage systems to ensure a continuous power supply, crucial for long-term missions.</li>
+                    <li><strong>Radiation Protection:</strong> Shielding materials to protect inhabitants from cosmic radiation, ensuring long-term health and safety.</li>
+                    <li><strong>Transportation Links:</strong> Docking facilities for spacecraft to enable crew transfer and cargo supply from Earth or other missions.</li>
+                </ul>
+                <p class="lead">The combination of these features will create a robust platform for exploration and research in the ever-expanding field of space science.</p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Interactive Module -->
+        <div class="row interactive-module">
+            <div class="col-md-12">
+                <h3>Interactive Physics Module</h3>
+                <p class="lead">Click the button below to visualize gravitational interactions and Lagrangian points:</p>
+                <button class="btn btn-secondary" onclick="showPhysicsAnimation()">Show Physics Animation</button>
+            </div>
+            <div id="physicsAnimation" style="display:none;" class="col-md-12">
+                <h3>Gravitational Force Animation</h3>
+                <div class="chart-container">
+                    <canvas id="physicsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function calculateLagrangePoints(event) {
+            event.preventDefault();
+            const mass1 = parseFloat(document.getElementById('mass1').value);
+            const mass2 = parseFloat(document.getElementById('mass2').value);
+            const distance = parseFloat(document.getElementById('distance').value);
+            const l1 = distance * (mass2 / (mass1 + mass2));
+            document.getElementById('lagrangeResult').innerText = `L1 Position: ${l1.toFixed(2)} meters from Body 1`;
+        }
+
+        const ctx = document.getElementById('lagrangeChart').getContext('2d');
+        const lagrangeChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['L1', 'L2', 'L3', 'L4', 'L5'],
+                datasets: [{
+                    label: 'Lagrangian Points',
+                    data: [1, 1, 1, 1, 1],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function showPhysicsAnimation() {
+            document.getElementById('physicsAnimation').style.display = 'block';
+            const ctx2 = document.getElementById('physicsChart').getContext('2d');
+            const physicsChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: [1, 2, 3, 4, 5],
+                    datasets: [{
+                        label: 'Gravitational Force',
+                        data: [1, 2, 3, 4, 5],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Distance'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Force'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
